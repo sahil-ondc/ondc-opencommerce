@@ -12,27 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: mockup-registry
-  namespace: default
-  labels:
-    app: mockup-registry
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mockup-registry
-  template:
-    metadata:
-      labels:
-        app: mockup-registry
-    spec:
-      containers:
-        - name: registry-mockup
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/registry-mockup:latest"
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
+  name: bap-adapter-sa
+  namespace: bap-adapter
+  annotations:
+    iam.gke.io/gcp-service-account: buyer-cluster-service-account@bit-ondc.iam.gserviceaccount.com
